@@ -77,7 +77,7 @@
         <p>The calculations performed by this application are as follows:</p>
         <ol>
             <li><strong>Mass</strong>: Mass is calculated by multiplying the concentration (in ng/μL) by the sample volume (in μL): Mass (ng) = Concentration (ng/μL) × Volume (μL).</li>
-            <li><strong>Moles</strong>: The number of moles is calculated by dividing the mass by the average molecular weight of the nucleotides in the sample. For double-stranded DNA, the average molecular weight is approximately 660 g/mol; for single-stranded DNA and RNA, it is approximately 330 g/mol. The formula is: Moles (mol) = Mass (ng) / (Average molecular weight (g/mol) × 1e9). The mass is converted from nanograms to grams by dividing by 1e9.</li>
+            <li><strong>Moles</strong>: The number of moles is calculated by dividing the mass by the average molecular weight of the nucleotides in the sample. For double-stranded and single-stranded DNA, the average molecular weight is approximately 607.4 g/mol; for single-stranded RNA, it is approximately 618.5 g/mol. The formula is: Moles (mol) = Mass (ng) / (Average molecular weight (g/mol) × 1e9). The mass is converted from nanograms to grams by dividing by 1e9.</li>
             <li><strong>Molarity</strong>: Molarity is calculated by dividing the number of moles by the sample volume (in μL) and multiplying by 1e6 to express the result in nmol/μL: Molarity (nmol/μL) = Moles (mol) / Volume (μL) × 1e6.</li>
         </ol>
     </div>
@@ -101,7 +101,7 @@
                 const mass = concentration * volume;
                 $("#mass").text(mass.toFixed(2));
 
-                const averageMolecularWeight = type === "ds-dna" ? 660 : 330;
+                const averageMolecularWeight = type === "ss-rna" ? 618.5 : 607.4;
                 const moles = mass / averageMolecularWeight / 1e9;
                 $("#moles").text(moles.toFixed(10));
 
