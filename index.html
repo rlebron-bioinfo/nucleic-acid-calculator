@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA/RNA Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">DNA/RNA Calculator</h1>
+        <form id="calc-form">
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="dna">DNA</option>
+                    <option value="rna">RNA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="concentration">Concentration (ng/μL)</label>
+                <input type="number" class="form-control" id="concentration" name="concentration" required>
+            </div>
+            <div class="form-group">
+                <label for="volume">Volume (μL)</label>
+                <input type="number" class="form-control" id="volume" name="volume" required>
+            </div>
+        </form>
+        <h3 class="text-center">Results</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <p><strong>Mass (ng):</strong> <span id="mass"></span></p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Moles (mol):</strong> <span id="moles"></span></p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Molarity (nmol/μL):</strong> <span id="molarity"></span></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function calculateResults() {
+                const type = $("#type").val();
+                const concentration = parseFloat($("#concentration").val());
+                const volume = parseFloat($("#volume").val());
+
+                if (isNaN(concentration) || isNaN(volume)) {
+                    $("#mass").text("-");
+                    $("#moles").text("-");
+                    $("#molarity").text("-");
+                    return;
+                }
+
+                const mass = concentration * volume;
+                $("#mass").text(mass.toFixed(2));
+
+                const averageMolecularWeight = type === "dna" ? 660 : 330;
+                const moles = mass / averageMolecularWeight / 1e9;
+                $("#moles").text(moles.toFixed(10));
+
+                const molarity = moles / volume;
+                $("#molarity").text((molarity * 1e6).toFixed(6));
+            }
+
+            $("#calc-form").on("change", function () {
+                calculateResults();
+            });
+
+            calculateResults();
+        });
+    </script>
+</body>
+</html>
