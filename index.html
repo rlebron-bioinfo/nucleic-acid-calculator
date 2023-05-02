@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNA/RNA Calculator</title>
+    <title>Nucleic Acid Calculator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -18,13 +18,15 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mt-4 mb-4">DNA/RNA Calculator</h1>
+        <h1 class="text-center mt-4 mb-4">Nucleic Acid Calculator</h1>
+        <p>This web application calculates the mass, moles, and molarity of genomic DNA and total RNA samples, both single-stranded and double-stranded. Enter the sample type, concentration, and volume to obtain the results.</p>
         <form id="calc-form">
             <div class="form-group">
                 <label for="type">Type</label>
                 <select class="form-control" id="type" name="type">
-                    <option value="dna">DNA</option>
-                    <option value="rna">RNA</option>
+                    <option value="ds-dna">Double-stranded DNA</option>
+                    <option value="ss-dna">Single-stranded DNA</option>
+                    <option value="ss-rna">Single-stranded RNA</option>
                 </select>
             </div>
             <div class="form-group">
@@ -48,6 +50,13 @@
                 <p><strong>Molarity (nmol/μL):</strong> <span id="molarity"></span></p>
             </div>
         </div>
+        <h4>Calculation Details</h4>
+        <p>The calculations performed by this application are as follows:</p>
+        <ol>
+            <li><strong>Mass</strong>: Mass is calculated by multiplying the concentration (in ng/μL) by the sample volume (in μL): Mass (ng) = Concentration (ng/μL) × Volume (μL).</li>
+            <li><strong>Moles</strong>: The number of moles is calculated by dividing the mass by the average molecular weight of the nucleotides in the sample. For double-stranded DNA, the average molecular weight is approximately 660 g/mol; for single-stranded DNA and RNA, it is approximately 330 g/mol. The formula is: Moles (mol) = Mass (ng) / (Average molecular weight (g/mol) × 1e9). The mass is converted from nanograms to grams by dividing by 1e9.</li>
+            <li><strong>Molarity</strong>: Molarity is calculated by dividing the number of moles by the sample volume (in μL) and multiplying by 1e6 to express the result in nmol/μL: Molarity (nmol/μL) = Moles (mol) / Volume (μL) × 1e6.</li>
+        </ol>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -69,7 +78,7 @@
                 const mass = concentration * volume;
                 $("#mass").text(mass.toFixed(2));
 
-                const averageMolecularWeight = type === "dna" ? 660 : 330;
+                const averageMolecularWeight = type === "ds-dna" ? 660 : 330;
                 const moles = mass / averageMolecularWeight / 1e9;
                 $("#moles").text(moles.toFixed(10));
 
