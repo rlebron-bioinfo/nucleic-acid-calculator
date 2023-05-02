@@ -14,6 +14,20 @@
         .container {
             max-width: 600px;
         }
+        
+        .result-card {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .result-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -41,13 +55,22 @@
         <h3 class="text-center">Results</h3>
         <div class="row">
             <div class="col-md-4">
-                <p><strong>Mass (ng):</strong> <span id="mass"></span></p>
+                <div class="result-card">
+                    <p><strong>Mass (ng):</strong></p>
+                    <p class="result-value" id="mass"></p>
+                </div>
             </div>
             <div class="col-md-4">
-                <p><strong>Moles (mol):</strong> <span id="moles"></span></p>
+                <div class="result-card">
+                    <p><strong>Moles (mol):</strong></p>
+                    <p class="result-value" id="moles"></p>
+                </div>
             </div>
             <div class="col-md-4">
-                <p><strong>Molarity (nmol/μL):</strong> <span id="molarity"></span></p>
+                <div class="result-card">
+                    <p><strong>Molarity (nmol/μL):</strong></p>
+                    <p class="result-value" id="molarity"></p>
+                </div>
             </div>
         </div>
         <h4>Calculation Details</h4>
